@@ -11,7 +11,7 @@ module Sinatra
       @_options = settings.active_model_serializers.merge(options)
 
       if serializer = get_serializer(resource)
-        serializer.new(resource, @_options).to_json
+        ActiveModel::Serializer::Adapter::Json.new(serializer.new(resource, @_options), @_options).to_json
       else
         resource.to_json(@_options)
       end
